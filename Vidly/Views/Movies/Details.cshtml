@@ -1,0 +1,29 @@
+﻿
+@model Vidly.ViewModels.MovieFormViewModel
+@{
+    ViewBag.Title = "Movie Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Movie Details</h2>
+
+
+@if (@Model.Id == null)
+{
+    <h3>No one ever rented this movie before</h3>
+}
+else
+{
+   <h3>@Model.Name</h3>
+   <ul>
+       <li>Genre: @Model.genreTypes.SingleOrDefault(m => m.Id == Model.GenreId).Name</li>
+       <li>Release Date: @Model.ReleaseDate.ToString()</li>
+       <li>Date added: @Model.DateAdded.ToString()</li>
+       <li>Number in Stock: @Model.NumberInStock</li>
+   </ul>
+
+   @Html.ActionLink("Edit","Edit", new { movieid = (int)@Model.Id }, new {@class="btn btn-primary" })
+}
+
+
+

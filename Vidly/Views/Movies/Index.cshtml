@@ -1,0 +1,40 @@
+﻿@model Vidly.ViewModels.MovieListViewModel
+@{
+    ViewBag.Title = "Movies Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Movies</h2>
+
+<a class="btn btn-primary" href="~/Movies/New">New Movie</a>
+<br />
+<br />
+
+@if (Model == null)
+{
+    <h3>No one ever rented this movie before</h3>
+}
+else
+{
+    <table  class="table table-bordered">
+        <tr>
+            <th>Movie</th>
+            <th>Genre</th>
+        </tr>
+        @foreach (var movie in Model.MovieList)
+        {
+            <tr>
+                <td>@Html.ActionLink(@movie.Name, "Details", "Movies", new { id = (int)@movie.Id }, null)</td>
+                <td>@Model.GenreTypes.SingleOrDefault( m => m.Id == movie.GenreId).Name</td>
+            </tr>
+        }
+
+
+    </table>
+
+
+
+}
+
+
+

@@ -1,0 +1,46 @@
+﻿
+@model List<Vidly.Models.Customer>
+@{
+    ViewBag.Title = "Customers Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Customers</h2>
+
+@Html.ActionLink("New Customer", "New", null,  new { @class = "btn btn-primary" })
+
+<br />
+<br />
+
+@if (Model == null)
+{
+    <h3>Nenhum cliente cadastrado</h3>
+}
+else
+{
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Customer</th>
+                <th>Newsletter Subscription</th>
+                <th>Membership Type</th>
+                <th>Discount Rate</th>
+
+            </tr>
+        </thead>
+        @foreach (Vidly.Models.Customer customer in Model)
+        {
+            <tr>
+                <td>@customer.Id</td>
+                <td>@Html.ActionLink(@customer.Name, "Edit", new { id = customer.Id }, null) </td>
+                <td>@customer.IsSubscribedToNewsletter</td>
+                <td>@customer.MembershipType.Id</td>
+                <td>@customer.MembershipType.DiscountRate%</td>
+            </tr>
+        }
+    </table>
+
+
+    <ul></ul>
+}
